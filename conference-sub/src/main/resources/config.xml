@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<conference>
+		<name>Conference internationale systeme distribue</name>
+		<category>Main Conference</category>
+		<early price="15.0" begin="10-02-2020" end="15-02-2020" />
+		<late price="25.50" begin="16-02-2020" end="20-02-2020" />
+	</conference>
+	<administrateurs>
+		<admin log="admin" pass="admin" />
+	</administrateurs>
+	<vip>
+		<person name="Chenhui" lastname="HE" status="MEMBER"
+			tarif="complet" />
+	</vip>
+</config>
