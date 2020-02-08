@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
@@ -16,14 +17,14 @@ import lombok.Data;
 @Data
 @Entity
 @EnableAutoConfiguration
+@Table(name = "conferences")
 public class Conference {
 
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	private String name;
 	private String category;
 	private float earlyPrice;
-	private float latePrice;
-	
+	private float latePrice;	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Periode earlyDate;
 	@ManyToOne(cascade=CascadeType.ALL)

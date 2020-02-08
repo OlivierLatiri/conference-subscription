@@ -9,6 +9,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +37,7 @@ public class LoadDataBase {
 	//	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	//	DocumentBuilder builder = factory.newDocumentBuilder();
 	//	Document doc = (Document) builder.parse(xmlFile);
+    private static final Logger logger = LoggerFactory.getLogger(LoadDataBase.class);
 	@Bean
 	CommandLineRunner initConferenceDatabase(ConferenceRepository repository) {
 		try {
@@ -45,7 +48,8 @@ public class LoadDataBase {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = (Document) builder.parse(xmlFile);
 			NodeList conferencesNodes = doc.getElementsByTagName("conference");
-
+			logger.info("------------------------");
+	        logger.info("All conferences unsorted:");
 			for(int i=0; i<conferencesNodes.getLength(); i++) {
 				Node conferenceNode = conferencesNodes.item(i);
 				if(conferenceNode.getNodeType() == Node.ELEMENT_NODE) {

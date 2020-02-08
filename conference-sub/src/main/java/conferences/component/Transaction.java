@@ -15,8 +15,8 @@ public class Transaction {
 	
 	
 	private @Id @GeneratedValue Long id;
-	private String nom;
-	private String prenom;
+	private String name;
+	private String lastName;
 	private Date date;
 	private Etat etat;
 	private String mail;
@@ -24,9 +24,9 @@ public class Transaction {
 	
 	public Transaction() {}
 	
-	public Transaction(String nom, String prenom, Date date, Etat etat, String mail, Status status) {
-		this.nom = nom;
-		this.prenom = prenom;
+	public Transaction(String name, String lastName, Date date, Etat etat, String mail, Status status) {
+		this.name = name;
+		this.lastName = lastName;
 		this.date = date;
 		this.etat = etat;
 		this.mail = mail;

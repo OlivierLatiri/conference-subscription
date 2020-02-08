@@ -9,10 +9,10 @@ import conferences.repository.ConferenceDaoImpl;
 @Service
 public class ConferenceServImpl {
 
-	@Autowired
-    ConferenceDaoImpl confdao;
- 
-    public Conference getConference() {
-        return confdao.getConferenceFromDb();
-    }
+//	@Autowired
+//    ConferenceDaoImpl confdao;
+// 
+//    public Conference getConference() {
+//        return confdao.getConferenceFromDb();
+//    }
 }

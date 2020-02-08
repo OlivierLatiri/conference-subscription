@@ -32,7 +32,7 @@ public class TransactionController {
     
     @PostMapping("/add")
     public ResponseEntity<HttpEntity> addTransaction(Transaction t){
-    	Optional<Transaction> s = itransaction.findByNameAndLastName(t.getPrenom(), t.getNom());
+    	Optional<Transaction> s = itransaction.findByNameAndLastName(t.getName(), t.getLastName());
     	if(s.isPresent()) return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.ALREADY_REPORTED);
     	
     	itransaction.save(t);
