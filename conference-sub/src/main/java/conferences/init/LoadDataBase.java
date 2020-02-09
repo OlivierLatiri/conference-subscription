@@ -49,7 +49,7 @@ public class LoadDataBase {
 			Document doc = (Document) builder.parse(xmlFile);
 			NodeList conferencesNodes = doc.getElementsByTagName("conference");
 			logger.info("------------------------");
-	        logger.info("All conferences unsorted:");
+	        logger.info("All conferences loaded:");
 			for(int i=0; i<conferencesNodes.getLength(); i++) {
 				Node conferenceNode = conferencesNodes.item(i);
 				if(conferenceNode.getNodeType() == Node.ELEMENT_NODE) {

@@ -2,15 +2,16 @@ package conferences.repository;
 
 import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import conferences.component.Admin;
 
-public interface AdminRepository extends CrudRepository<Admin, Long> {
+@Repository
+public interface AdminRepository extends JpaRepository<Admin, Long> {
 
-	Optional<Admin> findByLogin(String login);
+	Optional<Admin> findByUserName(String username);
 
 
-	Optional<Admin> findByNameAndLastName(String name, String lastName);
 	
 }

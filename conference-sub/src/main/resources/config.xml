@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<conference>
-		<name>Conference internationale systeme distribue</name>
+		<name>The 23 rd International Systems and Software Product Line
+Conference – SPLC 2019</name>
 		<category>Main Conference</category>
 		<early price="15.0" begin="10-02-2020" end="15-02-2020" />
 		<late price="25.50" begin="16-02-2020" end="20-02-2020" />

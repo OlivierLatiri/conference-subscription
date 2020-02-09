@@ -22,21 +22,33 @@ import conferences.repository.AdminRepository;
 @RestController
 public class AdminController {
 
+    private AdminRepository adminRepository; 
+	
 	@Autowired
-    private AdminRepository iadmin;
- 
+	public AdminController(AdminRepository adminRepository) {
+		this.adminRepository = adminRepository;
+	}
+	
     @GetMapping("/login")
-    public ResponseEntity<HttpEntity> loginAdmin(String login, String password) {
-        Optional<Admin> admin = iadmin.findByLogin(login);
-        if(admin.isPresent()) return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.OK);
-        return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.NOT_FOUND);
+    public ResponseEntity<HttpEntity> loginAdmin(String username, String password) {
+        Optional<Admin> admin = adminRepository.findByUserName(username);
+        if(admin.isPresent()) {
+        	return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.OK);
+//        	Or return l'object admin?
+//        	HttpHeaders headers = new HttpHeaders();
+//        	headers.add("Responded", "AdminController");
+//        	return ResponseEntity.accepted().headers(headers).body(admin);
+        	
+        }else {
+        	return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.NOT_FOUND);
+        }
     }
     
     @PostMapping("/add")
     public ResponseEntity<HttpEntity> addAdmin(@Valid Admin admin) {
-    	Optional<Admin> optAdmin = iadmin.findByNameAndLastName(admin.getName(),admin.getLastName());
+    	Optional<Admin> optAdmin = adminRepository.findByUserName(admin.getUserName());
     	if(optAdmin.isPresent()) return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.ALREADY_REPORTED);
-    	iadmin.save(admin);
+    	adminRepository.save(admin);
     	return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.OK);
     }
 }
