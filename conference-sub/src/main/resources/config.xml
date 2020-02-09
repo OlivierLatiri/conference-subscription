@@ -2,16 +2,26 @@
 <config>
 	<conference>
 		<name>The 23 rd International Systems and Software Product Line
-Conference – SPLC 2019</name>
+			Conference – SPLC 2019
+		</name>
 		<category>Main Conference</category>
 		<early price="15.0" begin="10-02-2020" end="15-02-2020" />
 		<late price="25.50" begin="16-02-2020" end="20-02-2020" />
 	</conference>
 	<administrateurs>
-		<admin log="admin" pass="admin" />
+		<admin>
+			<username>admin</username>
+			<password>admin</password>
+			<email>admin@admin.com</email>
+			<role>SUPERADMIN</role>
+		</admin>
 	</administrateurs>
 	<vip>
-		<person name="Chenhui" lastname="HE" status="MEMBER"
-			tarif="complet" />
+		<person>
+			<name>Chenhui</name>
+			<lastname>HE</lastname>
+			<email>chenhui.he@outlook.fr</email>
+			<role>MEMBRE</role>
+		</person>
 	</vip>
 </config>

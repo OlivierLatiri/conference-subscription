@@ -1,9 +1,9 @@
 package conferences.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import conferences.component.Conference;
+import conferences.component.VIP;
 
-public interface VIPRepository extends CrudRepository<Conference, Long> {
+public interface VIPRepository extends JpaRepository<VIP, Long> {
 
 }

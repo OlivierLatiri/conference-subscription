@@ -22,9 +22,14 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import conferences.component.Admin;
 import conferences.component.Conference;
 import conferences.component.Periode;
+import conferences.component.Role;
+import conferences.component.VIP;
+import conferences.repository.AdminRepository;
 import conferences.repository.ConferenceRepository;
+import conferences.repository.VIPRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Configuration
@@ -49,7 +54,7 @@ public class LoadDataBase {
 			Document doc = (Document) builder.parse(xmlFile);
 			NodeList conferencesNodes = doc.getElementsByTagName("conference");
 			logger.info("------------------------");
-	        logger.info("All conferences loaded:");
+	        logger.info("All conferences loading:");
 			for(int i=0; i<conferencesNodes.getLength(); i++) {
 				Node conferenceNode = conferencesNodes.item(i);
 				if(conferenceNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -83,29 +88,71 @@ public class LoadDataBase {
 		};
 	}
 
-	//	@Bean
-	//	CommandLineRunner initVIPDatabase(VIPRepository repository) {
-	//		File xmlFile = new File("config.xml");
-	//		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	//		DocumentBuilder builder = factory.newDocumentBuilder();
-	//		Document doc = (Document) builder.parse(xmlFile);
-	//		NodeList studentNodes = doc.getElementsByTagName("student");
-	//
-	//		return args -> {
-	//			log.info("Preloading " + repository.save(new VIP));
-	//		};
-	//	}
-	//
-	//	@Bean
-	//	CommandLineRunner initAdminDatabase(AdminRepository repository) {
-	//		File xmlFile = new File("config.xml");
-	//		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	//		DocumentBuilder builder = factory.newDocumentBuilder();
-	//		Document doc = (Document) builder.parse(xmlFile);
-	//		NodeList studentNodes = doc.getElementsByTagName("student");
-	//
-	//		return args -> {
-	//			log.info("Preloading " + repository.save(new Admin()));
-	//		};
-	//	}
+		@Bean
+		CommandLineRunner initVIPDatabase(VIPRepository repository) {
+			try {
+				Resource resource = new ClassPathResource("config.xml");
+				File xmlFile;
+				xmlFile = resource.getFile();
+				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder builder = factory.newDocumentBuilder();
+				Document doc = (Document) builder.parse(xmlFile);
+				NodeList vipNodes = doc.getElementsByTagName("person");
+				logger.info("------------------------");
+		        logger.info("All VIP loading:");
+		        for(int i=0; i<vipNodes.getLength(); i++) {
+					Node personNode = vipNodes.item(i);
+					if(personNode.getNodeType() == Node.ELEMENT_NODE) {
+						Element personElement = (Element) personNode;
+						String name = personElement.getElementsByTagName("name").item(0).getTextContent();
+						String lastName = personElement.getElementsByTagName("lastname").item(0).getTextContent();
+						String email = personElement.getElementsByTagName("email").item(0).getTextContent();
+						Role role = Role.valueOf(personElement.getElementsByTagName("role").item(0).getTextContent());
+
+						log.info("Preloading " + repository.save(new VIP(name,lastName, email, role)));
+					}
+
+				}
+			} catch (IOException | ParserConfigurationException | SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return args -> {
+
+			};
+		}
+	
+		@Bean
+		CommandLineRunner initAdminDatabase(AdminRepository repository) {
+			try {
+				Resource resource = new ClassPathResource("config.xml");
+				File xmlFile;
+				xmlFile = resource.getFile();
+				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder builder = factory.newDocumentBuilder();
+				Document doc = (Document) builder.parse(xmlFile);
+				NodeList administrateursNodes = doc.getElementsByTagName("admin");
+				logger.info("------------------------");
+		        logger.info("All admins loading:");
+		        for(int i=0; i<administrateursNodes.getLength(); i++) {
+					Node administrateurNode = administrateursNodes.item(i);
+					if(administrateurNode.getNodeType() == Node.ELEMENT_NODE) {
+						Element adminElement = (Element) administrateurNode;
+						String userName = adminElement.getElementsByTagName("username").item(0).getTextContent();
+						String password = adminElement.getElementsByTagName("password").item(0).getTextContent();
+						String email = adminElement.getElementsByTagName("email").item(0).getTextContent();
+						Role role = Role.valueOf(adminElement.getElementsByTagName("role").item(0).getTextContent());
+
+						log.info("Preloading " + repository.save(new Admin(userName,password, email, role)));
+					}
+
+				}
+			} catch (IOException | ParserConfigurationException | SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return args -> {
+
+			};
+		}
 }
