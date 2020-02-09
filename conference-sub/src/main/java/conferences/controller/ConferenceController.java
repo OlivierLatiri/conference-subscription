@@ -16,10 +16,10 @@ import conferences.repository.ConferenceRepository;
 public class ConferenceController {
 
 	@Autowired
-    private ConferenceRepository iconference;
+    private ConferenceRepository conferenceRepository;
  
     @GetMapping("/list")
     public Conference getConference() {
-        return iconference.findAll().iterator().next();
+        return conferenceRepository.findAll().iterator().next();
     }
 }

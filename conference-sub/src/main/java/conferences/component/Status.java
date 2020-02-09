@@ -1,6 +1,6 @@
 package conferences.component;
 
-public enum Etat {
+public enum Status {
 		INPAYE,
 		PAYE,
 		EXPIRE

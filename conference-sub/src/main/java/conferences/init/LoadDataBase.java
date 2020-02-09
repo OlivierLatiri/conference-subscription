@@ -36,12 +36,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoadDataBase {
 
-
-	//	Resource resource = new ClassPathResource("config.xml");
-	//	File xmlFile = resource.getFile();
-	//	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	//	DocumentBuilder builder = factory.newDocumentBuilder();
-	//	Document doc = (Document) builder.parse(xmlFile);
     private static final Logger logger = LoggerFactory.getLogger(LoadDataBase.class);
 	@Bean
 	CommandLineRunner initConferenceDatabase(ConferenceRepository repository) {

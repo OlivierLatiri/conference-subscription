@@ -23,19 +23,19 @@ import conferences.repository.DemandRepository;
 public class DemandController {
 
 	@Autowired
-    private DemandRepository itransaction;
+    private DemandRepository demandRepository;
  
     @GetMapping("/list")
-    public ResponseEntity<Iterable<Demand>> getTransactions() {
-        return new ResponseEntity<>(itransaction.findAll(), HttpStatus.OK);
+    public ResponseEntity<Iterable<Demand>> getDemands() {
+        return new ResponseEntity<>(demandRepository.findAll(), HttpStatus.OK);
     }
     
     @PostMapping("/add")
-    public ResponseEntity<HttpEntity> addTransaction(Demand t){
-    	Optional<Demand> s = itransaction.findByNameAndLastName(t.getName(), t.getLastName());
+    public ResponseEntity<HttpEntity> addNewDemand(Demand t){
+    	Optional<Demand> s = demandRepository.findByNameAndLastName(t.getName(), t.getLastName());
     	if(s.isPresent()) return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.ALREADY_REPORTED);
     	
-    	itransaction.save(t);
+    	demandRepository.save(t);
     	return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.OK);
     }
 }
