@@ -1,6 +1,9 @@
 package conferences.component;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -19,11 +22,20 @@ import lombok.NoArgsConstructor;
 @Table(name = "vip")
 public class VIP {
 	
-	private @Id @GeneratedValue Long id;
+	@Id 
+	@GeneratedValue 
+	@Column(name = "vip_id")
+	private Long id;
+	@Column(name = "name")
 	private String name;
+	@Column(name = "lastname")
 	private String lastName;
+	@Column(name = "email")
 	private String email;
+	@Column(name = "role")
+	@Enumerated(EnumType.STRING)
 	private Role role;
+	
 	public VIP(String name, String lastName, String email, Role role) {
 		super();
 		this.name = name;

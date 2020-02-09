@@ -1,21 +1,16 @@
 package conferences.component;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,15 +30,16 @@ public class Admin {
 	@Column(name = "admin_id")
 	private Long id;
 	@Column(name = "username")
-	@Length(min = 5, message = "*Your user name must have at least 5 characters")
+	@Size(min = 5, message = "*Your user name must have at least 5 characters")
 	private String userName;
 	@Column(name = "password")
-	@Length(min = 5, message = "*Your password must have at least 5 characters")
+	@Size(min = 5, message = "*Your password must have at least 5 characters")
 	private String password;
 	@Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
 	private String email;
 	@Column(name = "role")
+	@Enumerated(EnumType.STRING)
     private Role role;
 
 	public Admin(String userName, String password, String email, Role role) {
