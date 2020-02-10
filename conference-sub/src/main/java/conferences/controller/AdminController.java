@@ -35,6 +35,7 @@ public class AdminController {
         if(admin.isPresent() && admin.get().getPassword().equals(password)) {
         	// j'ai choisi de retourner un object Admin, mais on peut
         	// très bien le changer en String, et retourné "login succes" comme phrase
+        	// https://www.baeldung.com/spring-response-entity : lien internet où je me suis inspiré
         	return new ResponseEntity<>(admin.get(), HttpStatus.OK);    	
         }else {
         	return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
