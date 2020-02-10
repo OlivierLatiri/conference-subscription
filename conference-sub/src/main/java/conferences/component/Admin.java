@@ -29,7 +29,7 @@ public class Admin {
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	@Column(name = "admin_id")
 	private Long id;
-	@Column(name = "username")
+	@Column(name = "username", unique=true) //unique sert à garantir que c'est unique not sure si ça marche
 	@Size(min = 5, message = "*Your user name must have at least 5 characters")
 	private String userName;
 	@Column(name = "password")

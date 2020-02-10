@@ -32,13 +32,8 @@ public class AdminController {
     @GetMapping("/login")
     public ResponseEntity<HttpEntity> loginAdmin(String username, String password) {
         Optional<Admin> admin = adminRepository.findByUserName(username);
-        if(admin.isPresent()) {
-        	return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.OK);
-//        	Or return l'object admin?
-//        	HttpHeaders headers = new HttpHeaders();
-//        	headers.add("Responded", "AdminController");
-//        	return ResponseEntity.accepted().headers(headers).body(admin);
-        	
+        if(admin.isPresent() && admin.get().getPassword().equals(password)) {
+        	return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.OK);    	
         }else {
         	return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.NOT_FOUND);
         }
