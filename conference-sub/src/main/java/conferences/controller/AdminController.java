@@ -30,12 +30,12 @@ public class AdminController {
 	}
 	
     @GetMapping("/login")
-    public ResponseEntity<HttpEntity> loginAdmin(String username, String password) {
+    public ResponseEntity<Admin> loginAdmin(String username, String password) {
         Optional<Admin> admin = adminRepository.findByUserName(username);
         if(admin.isPresent() && admin.get().getPassword().equals(password)) {
-        	return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.OK);    	
+        	return new ResponseEntity<>(admin.get(), HttpStatus.OK);    	
         }else {
-        	return new ResponseEntity<>(HttpEntity.EMPTY, HttpStatus.NOT_FOUND);
+        	return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
     
