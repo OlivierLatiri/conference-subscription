@@ -33,6 +33,8 @@ public class AdminController {
     public ResponseEntity<Admin> loginAdmin(String username, String password) {
         Optional<Admin> admin = adminRepository.findByUserName(username);
         if(admin.isPresent() && admin.get().getPassword().equals(password)) {
+        	// j'ai choisi de retourner un object Admin, mais on peut
+        	// très bien le changer en String, et retourné "login succes" comme phrase
         	return new ResponseEntity<>(admin.get(), HttpStatus.OK);    	
         }else {
         	return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
