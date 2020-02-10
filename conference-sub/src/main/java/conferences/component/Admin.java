@@ -40,6 +40,7 @@ public class Admin {
 	private String email;
 	@Column(name = "role")
 	@Enumerated(EnumType.STRING)
+	@NotEmpty(message = "*Please specify admin role")
     private Role role;
 
 	public Admin(String userName, String password, String email, Role role) {

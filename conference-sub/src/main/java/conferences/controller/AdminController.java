@@ -41,7 +41,6 @@ public class AdminController {
         	return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
-    
     @PostMapping("/add")
     public ResponseEntity<HttpEntity> addAdmin(@Valid Admin admin) {
     	Optional<Admin> optAdmin = adminRepository.findByUserName(admin.getUserName());
