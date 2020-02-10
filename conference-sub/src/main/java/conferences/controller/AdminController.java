@@ -36,6 +36,7 @@ public class AdminController {
         	// j'ai choisi de retourner un object Admin, mais on peut
         	// très bien le changer en String, et retourné "login succes" comme phrase
         	// https://www.baeldung.com/spring-response-entity : lien internet où je me suis inspiré
+        	// if want to implement another way : https://medium.com/@joel.barmettler/quick-introduction-to-spring-boot-24a4414a559b
         	return new ResponseEntity<>(admin.get(), HttpStatus.OK);    	
         }else {
         	return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

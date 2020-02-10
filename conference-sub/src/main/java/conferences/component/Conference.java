@@ -31,35 +31,43 @@ public class Conference {
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	@Column(name = "conference_id")
 	private Long id;
+	
 	@Column(name = "name")
 	private String name;
+	
 	@Column(name = "category")
 	private String category;
-	@Column(name = "earlyprice")
-	private float earlyPrice;
-	@Column(name = "lateprice")
-	private float latePrice;	
-	@Column(name = "earlydate")
-	@ManyToOne(cascade=CascadeType.ALL)
-	private Periode earlyDate;
-	@Column(name = "latedate")
-	@ManyToOne(cascade=CascadeType.ALL)
-	private Periode lateDate;
 	
-	public Conference(String name, String category, float earlyPrice, float latePrice, Periode earlyDate, Periode latePeriode) {
+	@Column(name = "early_price")
+	private float earlyPrice;
+	
+	@Column(name = "late_price")
+	private float latePrice;	
+	
+	@Column(name = "begin_er")
+	private Date beginER;
+	@Column(name = "end_er")
+	private Date endER;
+	@Column(name = "begin_lr")
+	private Date beginLR;
+	@Column(name = "end_lr")
+	private Date endLR;
+	
+	public Conference(String name, String category, float earlyPrice, float latePrice, Date beginER, Date endER, Date beginLR, Date endLR) {
 		this.name = name;
 		this.category = category;
 		this.earlyPrice = earlyPrice;
 		this.latePrice = latePrice;
-		this.earlyDate = earlyDate;
-		this.lateDate = latePeriode;
+		this.beginER = beginER;
+		this.endER = endER;
+		this.beginLR = beginLR;
 	}
 	
 	public float pricePeriod(Date d) throws Exception {
-		if(earlyDate.contains(d)) {
+		if(beginER.compareTo(d)*d.compareTo(endER) >= 0) {
 			return earlyPrice;
 		}
-		else if(lateDate.contains(d)) {
+		else if(beginLR.compareTo(d)*d.compareTo(endLR) >= 0) {
 			return latePrice;
 		}
 		throw new Exception();

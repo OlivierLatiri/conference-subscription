@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,7 +25,6 @@ import org.xml.sax.SAXException;
 
 import conferences.component.Admin;
 import conferences.component.Conference;
-import conferences.component.Periode;
 import conferences.component.Role;
 import conferences.component.VIP;
 import conferences.repository.AdminRepository;
@@ -62,14 +62,12 @@ public class LoadDataBase {
 					String beginLateDate = conferenceElement.getElementsByTagName("late").item(0).getAttributes().getNamedItem("begin").getNodeValue();
 					String endLateDate = conferenceElement.getElementsByTagName("late").item(0).getAttributes().getNamedItem("end").getNodeValue();
 
+					Date beginER = new SimpleDateFormat("dd-MM-yyyy").parse(beginEarlyDate);
+					Date endER = new SimpleDateFormat("dd-MM-yyyy").parse(endEarlyDate);
+					Date beginLR = new SimpleDateFormat("dd-MM-yyyy").parse(beginLateDate);
+					Date endLR = new SimpleDateFormat("dd-MM-yyyy").parse(endLateDate);
 
-					Periode earlyPeriod;
-					Periode latePeriod;
-					earlyPeriod = new Periode(new SimpleDateFormat("dd-MM-yyyy").parse(beginEarlyDate),new SimpleDateFormat("dd-MM-yyyy").parse(endEarlyDate));
-
-					latePeriod = new Periode(new SimpleDateFormat("dd-MM-yyyy").parse(beginLateDate),new SimpleDateFormat("dd-MM-yyyy").parse(endLateDate));
-
-					log.info("Preloading " + repository.save(new Conference(name,category,earlyPrice,latePrice,earlyPeriod,latePeriod)));
+					log.info("Preloading " + repository.save(new Conference(name,category,earlyPrice,latePrice, beginER, endER, beginLR,endLR)));
 				}
 
 			}
@@ -102,7 +100,7 @@ public class LoadDataBase {
 						String lastName = personElement.getElementsByTagName("lastname").item(0).getTextContent();
 						String email = personElement.getElementsByTagName("email").item(0).getTextContent();
 						Role role = Role.valueOf(personElement.getElementsByTagName("role").item(0).getTextContent());
-
+						
 						log.info("Preloading " + repository.save(new VIP(name,lastName, email, role)));
 					}
 

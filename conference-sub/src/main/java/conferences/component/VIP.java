@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -23,15 +24,18 @@ import lombok.NoArgsConstructor;
 public class VIP {
 	
 	@Id 
-	@GeneratedValue 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "vip_id")
 	private Long id;
+	
 	@Column(name = "name")
 	private String name;
 	@Column(name = "lastname")
 	private String lastName;
+	
 	@Column(name = "email")
 	private String email;
+	
 	@Column(name = "role")
 	@Enumerated(EnumType.STRING)
 	private Role role;
